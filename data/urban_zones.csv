@@ -1,0 +1,19 @@
+zone_id,zone_name,city,zone_category,active_fleet_target,base_surge_factor
+Z101,Gurugram Cyber City,Delhi-NCR,Tech Park,120,1.4
+Z102,Udyog Vihar Gurugram,Delhi-NCR,Commercial,90,1.3
+Z103,Golf Course Road,Delhi-NCR,Residential_Premium,80,1.2
+Z104,Delhi IGI Airport T3,Delhi-NCR,Airport,150,1.6
+Z105,Connaught Place,Delhi-NCR,Commercial,110,1.3
+Z106,Noida Sector 62,Delhi-NCR,Tech Park,85,1.2
+Z107,South Extension,Delhi-NCR,Residential,70,1.1
+Z201,Koramangala,Bengaluru,Commercial_Startup,140,1.5
+Z202,Indiranagar,Bengaluru,Commercial_Nightlife,130,1.5
+Z203,Whitefield Tech Corridor,Bengaluru,Tech Park,160,1.6
+Z204,HSR Layout,Bengaluru,Residential_Startup,110,1.3
+Z205,Electronic City Phase 1,Bengaluru,Tech Park,100,1.4
+Z206,Kempegowda Airport T1,Bengaluru,Airport,140,1.7
+Z301,Bandra Kurla Complex (BKC),Mumbai,Financial District,160,1.7
+Z302,Lower Parel,Mumbai,Commercial,130,1.5
+Z303,Andheri East MIDC,Mumbai,Commercial_Transit,120,1.4
+Z304,Powai Hiranandani,Mumbai,Residential_Tech,95,1.2
+Z305,Mumbai Airport T2,Mumbai,Airport,150,1.6

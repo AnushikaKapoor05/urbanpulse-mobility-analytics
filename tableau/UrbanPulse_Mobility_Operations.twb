@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<workbook source-build='2023.3.0' source-platform='mac' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AutoCreateAndUpdateDSDPhoneLayouts />
+    <IntuitiveSorting />
+    <SaveLocation />
+    <ZoneBackgroundTransparency />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='Ride Requests &amp; Fulfillment' inline='true' name='federated.urbanpulse' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='ride_requests' name='textscan.requests'>
+            <connection class='textscan' directory='../data' filename='ride_requests.csv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation join='left' type='join'>
+          <clause type='join'>
+            <expression op='='>
+              <expression op='[ride_requests.csv].[booking_id]' />
+              <expression op='[trip_fulfillment_logs.csv].[booking_id]' />
+            </expression>
+          </clause>
+          <relation join='left' type='join'>
+            <clause type='join'>
+              <expression op='='>
+                <expression op='[ride_requests.csv].[pickup_zone_id]' />
+                <expression op='[urban_zones.csv].[zone_id]' />
+              </expression>
+            </clause>
+            <relation connection='textscan.requests' name='ride_requests.csv' table='[ride_requests#csv]' type='table'>
+              <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                <column datatype='string' name='booking_id' ordinal='0' />
+                <column datatype='string' name='customer_id' ordinal='1' />
+                <column datatype='string' name='pickup_zone_id' ordinal='2' />
+                <column datatype='string' name='drop_zone_id' ordinal='3' />
+                <column datatype='string' name='vehicle_category' ordinal='4' />
+                <column datatype='datetime' name='request_timestamp' ordinal='5' />
+                <column datatype='real' name='estimated_distance_km' ordinal='6' />
+                <column datatype='real' name='base_fare_inr' ordinal='7' />
+                <column datatype='real' name='surge_multiplier' ordinal='8' />
+                <column datatype='real' name='total_quoted_fare_inr' ordinal='9' />
+                <column datatype='string' name='booking_status' ordinal='10' />
+              </columns>
+            </relation>
+            <relation connection='textscan.requests' name='urban_zones.csv' table='[urban_zones#csv]' type='table'>
+              <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+                <column datatype='string' name='zone_id' ordinal='0' />
+                <column datatype='string' name='zone_name' ordinal='1' />
+                <column datatype='string' name='city' ordinal='2' />
+                <column datatype='string' name='zone_category' ordinal='3' />
+                <column datatype='integer' name='active_fleet_target' ordinal='4' />
+                <column datatype='real' name='base_surge_factor' ordinal='5' />
+              </columns>
+            </relation>
+          </relation>
+          <relation connection='textscan.requests' name='trip_fulfillment_logs.csv' table='[trip_fulfillment_logs#csv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+              <column datatype='string' name='fulfillment_id' ordinal='0' />
+              <column datatype='string' name='booking_id' ordinal='1' />
+              <column datatype='string' name='driver_id' ordinal='2' />
+              <column datatype='string' name='vehicle_id' ordinal='3' />
+              <column datatype='datetime' name='driver_assigned_at' ordinal='4' />
+              <column datatype='datetime' name='arrived_at_pickup_at' ordinal='5' />
+              <column datatype='datetime' name='trip_started_at' ordinal='6' />
+              <column datatype='datetime' name='trip_ended_at' ordinal='7' />
+              <column datatype='real' name='pickup_wait_mins' ordinal='8' />
+              <column datatype='real' name='trip_duration_mins' ordinal='9' />
+              <column datatype='real' name='actual_distance_km' ordinal='10' />
+              <column datatype='real' name='gross_fare_inr' ordinal='11' />
+              <column datatype='real' name='platform_commission_pct' ordinal='12' />
+              <column datatype='real' name='driver_payout_inr' ordinal='13' />
+              <column datatype='real' name='rider_rating' ordinal='14' />
+              <column datatype='real' name='toll_or_tips_inr' ordinal='15' />
+            </columns>
+          </relation>
+        </relation>
+      </connection>
+      <aliases enabled='yes' />
+      
+      <!-- CALCULATED FIELDS -->
+      <column caption='Trip Completion Rate %' datatype='real' name='[Calculation_CompletionRate]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM(IF [booking_status] = &quot;Completed&quot; THEN 1 ELSE 0 END) / COUNT([booking_id]) * 100' />
+      </column>
+      <column caption='Driver Cancellation Rate %' datatype='real' name='[Calculation_DriverCancelRate]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM(IF [booking_status] = &quot;Driver_Cancelled&quot; THEN 1 ELSE 0 END) / COUNT([booking_id]) * 100' />
+      </column>
+      <column caption='Rider Cancellation Rate %' datatype='real' name='[Calculation_RiderCancelRate]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM(IF [booking_status] = &quot;Rider_Cancelled&quot; THEN 1 ELSE 0 END) / COUNT([booking_id]) * 100' />
+      </column>
+      <column caption='Net Platform Revenue (₹)' datatype='real' name='[Calculation_NetRevenue]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='SUM([gross_fare_inr]) - SUM([driver_payout_inr])' />
+      </column>
+      <column caption='Avg Pickup Wait Mins' datatype='real' name='[Calculation_AvgWaitMins]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='AVG(IF [pickup_wait_mins] &gt;= 0 THEN [pickup_wait_mins] END)' />
+      </column>
+      <column caption='Surge Multiplier Tier' datatype='string' name='[Calculation_SurgeTier]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='IF [surge_multiplier] = 1.0 THEN &quot;1. Base (1.0x)&quot; ELSEIF [surge_multiplier] &lt;= 1.3 THEN &quot;2. Mild (1.1x-1.3x)&quot; ELSEIF [surge_multiplier] &lt;= 1.7 THEN &quot;3. High (1.4x-1.7x)&quot; ELSE &quot;4. Extreme (1.8x+)&quot; END' />
+      </column>
+      <column caption='Zone Benchmark Completion Rate (FIXED LOD)' datatype='real' name='[Calculation_LOD_ZoneBenchmark]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='{ FIXED [zone_name] : SUM(IF [booking_status] = &quot;Completed&quot; THEN 1 ELSE 0 END) / COUNT([booking_id]) * 100 }' />
+      </column>
+      <column caption='City Baseline Wait Time (FIXED LOD)' datatype='real' name='[Calculation_LOD_CityWait]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='{ FIXED [city] : AVG(IF [pickup_wait_mins] &gt;= 0 THEN [pickup_wait_mins] END) }' />
+      </column>
+      <column caption='CO2 Emissions Averted Kg' datatype='real' name='[Calculation_CO2Avoided]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='IF [vehicle_category] = &quot;EV_Sedan&quot; THEN ([actual_distance_km] / 16.0) * 2.31 ELSEIF [vehicle_category] = &quot;Bike_Taxi&quot; THEN ([actual_distance_km] / 35.0) * 2.31 ELSE 0.0 END' />
+      </column>
+
+      <layout dim-ordering='alphabetic' dim-percentage='0.5' measure-ordering='alphabetic' measure-percentage='0.5' show-structure='true' />
+    </datasource>
+  </datasources>
+
+  <worksheets>
+    <!-- WORKSHEET 1: Hourly Demand & Fulfillment -->
+    <worksheet name='Hourly Supply Demand'>
+      <table>
+        <view>
+          <datasources>
+            <datasource name='federated.urbanpulse' />
+          </datasources>
+          <datasource-dependencies datasource='federated.urbanpulse'>
+            <column datatype='string' name='booking_id' role='dimension' type='nominal' />
+            <column datatype='datetime' name='request_timestamp' role='dimension' type='ordinal' />
+            <column name='[Calculation_CompletionRate]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+          </pane>
+        </panes>
+        <rows>[federated.urbanpulse].[Calculation_CompletionRate]</rows>
+        <cols>[federated.urbanpulse].[request_timestamp]</cols>
+      </table>
+      <simple-id uuid='{00000001-0000-0000-0000-000000000001}' />
+    </worksheet>
+
+    <!-- WORKSHEET 2: Surge Pricing Elasticity -->
+    <worksheet name='Surge Pricing Elasticity'>
+      <table>
+        <view>
+          <datasources>
+            <datasource name='federated.urbanpulse' />
+          </datasources>
+          <datasource-dependencies datasource='federated.urbanpulse'>
+            <column name='[Calculation_SurgeTier]' role='dimension' type='nominal' />
+            <column name='[Calculation_CompletionRate]' role='measure' type='quantitative' />
+            <column name='[Calculation_RiderCancelRate]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+          </pane>
+        </panes>
+        <rows>[federated.urbanpulse].[Calculation_CompletionRate]</rows>
+        <cols>[federated.urbanpulse].[Calculation_SurgeTier]</cols>
+      </table>
+      <simple-id uuid='{00000002-0000-0000-0000-000000000002}' />
+    </worksheet>
+
+    <!-- WORKSHEET 3: City & Zone Operational Performance -->
+    <worksheet name='City Performance Benchmarks'>
+      <table>
+        <view>
+          <datasources>
+            <datasource name='federated.urbanpulse' />
+          </datasources>
+          <datasource-dependencies datasource='federated.urbanpulse'>
+            <column datatype='string' name='city' role='dimension' type='nominal' />
+            <column name='[Calculation_NetRevenue]' role='measure' type='quantitative' />
+            <column name='[Calculation_AvgWaitMins]' role='measure' type='quantitative' />
+            <column name='[Calculation_CO2Avoided]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows>[federated.urbanpulse].[Calculation_NetRevenue]</rows>
+        <cols>[federated.urbanpulse].[city]</cols>
+      </table>
+      <simple-id uuid='{00000003-0000-0000-0000-000000000003}' />
+    </worksheet>
+  </worksheets>
+
+  <dashboards>
+    <dashboard name='UrbanPulse Executive Dashboard'>
+      <style />
+      <size maxheight='800' maxwidth='1300' minheight='800' minwidth='1300' />
+      <zones>
+        <zone h='100000' id='1' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone h='50000' id='2' name='Hourly Supply Demand' w='50000' x='0' y='0' />
+          <zone h='50000' id='3' name='Surge Pricing Elasticity' w='50000' x='50000' y='0' />
+          <zone h='50000' id='4' name='City Performance Benchmarks' w='100000' x='0' y='50000' />
+        </zone>
+      </zones>
+    </dashboard>
+  </dashboards>
+
+  <windows source-height='30'>
+    <window class='dashboard' maximized='true' name='UrbanPulse Executive Dashboard'>
+      <viewpoints />
+      <active id='-1' />
+    </window>
+  </windows>
+</workbook>

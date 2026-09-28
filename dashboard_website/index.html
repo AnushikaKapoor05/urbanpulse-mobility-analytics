@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UrbanPulse Mobility | Fleet Intelligence & Operations Analytics Dashboard</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            },
+            surface: {
+              dark: '#0f172a',
+              card: '#1e293b',
+              border: '#334155'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    code, pre { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- TOP NAVIGATION HEADER -->
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-50 px-6 py-3">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+          <svg class="w-6 h-6 text-slate-950 font-bold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-xl font-bold tracking-tight text-white">UrbanPulse <span class="text-emerald-400">Mobility</span></h1>
+            <span class="px-2 py-0.5 text-xs font-semibold rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">Data & BI Operations</span>
+          </div>
+          <p class="text-xs text-slate-400">Urban Mobility Fleet Intelligence & Ride-Hailing Operations Analytics</p>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800 text-sm overflow-x-auto">
+        <button onclick="switchTab('dashboard')" id="tab-btn-dashboard" class="tab-btn px-3 py-1.5 rounded-lg font-medium text-emerald-400 bg-slate-800 shadow-sm transition">
+          Executive Dashboard
+        </button>
+        <button onclick="switchTab('sql')" id="tab-btn-sql" class="tab-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-slate-200 transition">
+          SQL Analytics Suite
+        </button>
+        <button onclick="switchTab('mis')" id="tab-btn-mis" class="tab-btn px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-slate-200 transition">
+          Operations MIS
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-6 space-y-6">
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: EXECUTIVE DASHBOARD -->
+    <!-- ========================================================================= -->
+    <div id="tab-dashboard" class="tab-content space-y-6">
+
+      <!-- FILTER CONTROLS BAR -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm">
+        <div class="flex items-center gap-3 w-full md:w-auto">
+          <span class="text-xs uppercase tracking-wider font-semibold text-slate-400 flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
+            Interactive Filters:
+          </span>
+          <!-- City Slicer -->
+          <select id="filter-city" onchange="applyFilters()" class="bg-slate-950 border border-slate-700 text-sm rounded-lg px-3 py-1.5 text-slate-200 focus:outline-none focus:border-emerald-500 transition">
+            <option value="ALL">All Urban Clusters (All Cities)</option>
+            <option value="Delhi-NCR">Delhi-NCR (Gurugram, IGI, Noida)</option>
+            <option value="Bengaluru">Bengaluru (Koramangala, Whitefield, HSR)</option>
+            <option value="Mumbai">Mumbai (BKC, Lower Parel, Powai)</option>
+          </select>
+
+          <!-- Vehicle Category Slicer -->
+          <select id="filter-category" onchange="applyFilters()" class="bg-slate-950 border border-slate-700 text-sm rounded-lg px-3 py-1.5 text-slate-200 focus:outline-none focus:border-emerald-500 transition">
+            <option value="ALL">All Fleet Categories</option>
+            <option value="EV_Sedan">EV Sedan (Tata Tigor, MG ZS EV)</option>
+            <option value="Prime_Sedan">Prime Sedan (Dzire, Aura)</option>
+            <option value="Auto_Rickshaw">Auto Rickshaw (Bajaj E-Tec, Piaggio)</option>
+            <option value="Bike_Taxi">Bike Taxi (Ola S1, Splendor)</option>
+          </select>
+        </div>
+
+        <div class="flex items-center gap-3 text-xs text-slate-400">
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            Operational Timeframe: 45 Days Data
+          </span>
+          <button onclick="resetFilters()" class="text-xs text-slate-400 hover:text-emerald-400 underline underline-offset-4 transition">
+            Reset Filters
+          </button>
+        </div>
+      </div>
+
+      <!-- 6 HIGH-IMPACT EXECUTIVE KPI CARDS -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <!-- Card 1 -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-1 relative overflow-hidden group hover:border-emerald-500/50 transition">
+          <div class="text-xs font-medium text-slate-400 uppercase tracking-wider">Total Ride Requests</div>
+          <div id="kpi-requests" class="text-2xl font-extrabold text-white">6,800</div>
+          <div class="text-[11px] text-emerald-400 flex items-center gap-1">
+            <span>↑ 100% Demand</span>
+          </div>
+          <div class="absolute -right-2 -bottom-2 w-12 h-12 bg-emerald-500/5 rounded-full blur group-hover:bg-emerald-500/10 transition"></div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-1 relative overflow-hidden group hover:border-emerald-500/50 transition">
+          <div class="text-xs font-medium text-slate-400 uppercase tracking-wider">Fulfillment Rate</div>
+          <div id="kpi-fulfillment" class="text-2xl font-extrabold text-emerald-400">72.9%</div>
+          <div class="text-[11px] text-slate-400">Completed Rides</div>
+          <div class="absolute -right-2 -bottom-2 w-12 h-12 bg-emerald-500/5 rounded-full blur group-hover:bg-emerald-500/10 transition"></div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-1 relative overflow-hidden group hover:border-emerald-500/50 transition">
+          <div class="text-xs font-medium text-slate-400 uppercase tracking-wider">Driver Cancel Rate</div>
+          <div id="kpi-driver-cancel" class="text-2xl font-extrabold text-amber-400">13.4%</div>
+          <div class="text-[11px] text-slate-400">Refusal / Traffic</div>
+          <div class="absolute -right-2 -bottom-2 w-12 h-12 bg-amber-500/5 rounded-full blur group-hover:bg-amber-500/10 transition"></div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-1 relative overflow-hidden group hover:border-emerald-500/50 transition">
+          <div class="text-xs font-medium text-slate-400 uppercase tracking-wider">Net Platform Revenue</div>
+          <div id="kpi-revenue" class="text-2xl font-extrabold text-white">₹4.87 Lakh</div>
+          <div class="text-[11px] text-emerald-400">20% Take Rate</div>
+          <div class="absolute -right-2 -bottom-2 w-12 h-12 bg-emerald-500/5 rounded-full blur group-hover:bg-emerald-500/10 transition"></div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-1 relative overflow-hidden group hover:border-emerald-500/50 transition">
+          <div class="text-xs font-medium text-slate-400 uppercase tracking-wider">Avg Pickup Wait</div>
+          <div id="kpi-wait" class="text-2xl font-extrabold text-sky-400">8.1 min</div>
+          <div class="text-[11px] text-slate-400">Driver En-Route TAT</div>
+          <div class="absolute -right-2 -bottom-2 w-12 h-12 bg-sky-500/5 rounded-full blur group-hover:bg-sky-500/10 transition"></div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-1 relative overflow-hidden group hover:border-emerald-500/50 transition">
+          <div class="text-xs font-medium text-slate-400 uppercase tracking-wider">CO2 Averted (ESG)</div>
+          <div id="kpi-co2" class="text-2xl font-extrabold text-emerald-400">5.82 T</div>
+          <div class="text-[11px] text-slate-400">2,519 L Petrol Saved</div>
+          <div class="absolute -right-2 -bottom-2 w-12 h-12 bg-emerald-500/5 rounded-full blur group-hover:bg-emerald-500/10 transition"></div>
+        </div>
+      </div>
+
+      <!-- 4 INTERACTIVE QUADRANT CHARTS -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- Chart 1: Supply vs Demand Curve (Hourly) -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-base font-bold text-white flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+                Hourly Supply-Demand Matching Curve
+              </h3>
+              <p class="text-xs text-slate-400">Ride request volume vs trip fulfillment percentage across 24-hour cycle</p>
+            </div>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Dual-Axis</span>
+          </div>
+          <div class="relative h-72">
+            <canvas id="chart-hourly"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart 2: Cancellation Diagnostics by Lost GBV -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-base font-bold text-white flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                Cancellation Root Causes & Lost Revenue
+              </h3>
+              <p class="text-xs text-slate-400">Quantifying lost Gross Booking Value (GBV) by cancellation reason</p>
+            </div>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Pareto</span>
+          </div>
+          <div class="relative h-72">
+            <canvas id="chart-cancellations"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart 3: Surge Pricing Elasticity -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-base font-bold text-white flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span>
+                Surge Pricing Elasticity & Conversion
+              </h3>
+              <p class="text-xs text-slate-400">Fulfillment conversion rate vs rider price resistance across surge tiers</p>
+            </div>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">Elasticity</span>
+          </div>
+          <div class="relative h-72">
+            <canvas id="chart-surge"></canvas>
+          </div>
+        </div>
+
+        <!-- Chart 4: Fleet Powertrain & ESG Sustainability -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-base font-bold text-white flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                Fleet Powertrain Share & Green Distance
+              </h3>
+              <p class="text-xs text-slate-400">Operational kilometers driven and clean energy adoption</p>
+            </div>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-slate-800 text-slate-300">ESG / Fleet</span>
+          </div>
+          <div class="relative h-72">
+            <canvas id="chart-powertrain"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: SQL ANALYTICS SUITE -->
+    <!-- ========================================================================= -->
+    <div id="tab-sql" class="tab-content hidden space-y-6">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-lg font-bold text-white">Production SQL Analytics Engine</h2>
+            <p class="text-xs text-slate-400">7 modular production SQL scripts designed for PostgreSQL & SQLite demonstrating CTEs, Window functions, and aggregation.</p>
+          </div>
+          <!-- Query Selector -->
+          <select id="sql-query-select" onchange="renderSqlQuery()" class="bg-slate-950 border border-slate-700 text-sm rounded-lg px-3 py-1.5 text-slate-200 focus:outline-none focus:border-emerald-500">
+            <option value="02_supply_demand">02: Supply-Demand Fulfillment KPIs (CTEs & Time Slots)</option>
+            <option value="03_cancellations">03: Cancellation Diagnostics & Lost GBV (DENSE_RANK)</option>
+            <option value="04_surge">04: Surge Pricing Elasticity (Conversion Analysis)</option>
+            <option value="05_fleet">05: Fleet Utilization & Workhorses (RANK & Utilization)</option>
+            <option value="06_drivers">06: Driver Payouts & Turnaround Time (LAG Window Function)</option>
+            <option value="07_esg">07: EV Sustainability & Unit Economics (Cost per KM)</option>
+            <option value="01_schema">01: Relational Schema DDL & Base Views</option>
+          </select>
+        </div>
+
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span id="sql-query-title" class="text-sm font-semibold text-emerald-400">Query 02: Supply-Demand Fulfillment KPIs</span>
+            <button onclick="copySqlQuery()" class="text-xs px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition flex items-center gap-1">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              Copy SQL
+            </button>
+          </div>
+          <pre class="bg-slate-950 border border-slate-800 rounded-xl p-4 text-xs text-slate-300 overflow-x-auto leading-relaxed max-h-96" id="sql-code-display"></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: OPERATIONS MIS VIEWER -->
+    <!-- ========================================================================= -->
+    <div id="tab-mis" class="tab-content hidden space-y-6">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 space-y-4">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-lg font-bold text-white">Daily & Weekly Operations MIS Table</h2>
+            <p class="text-xs text-slate-400">Automated daily operational metrics table matching MS Excel / Google Sheets reporting requirements.</p>
+          </div>
+          <div class="text-xs text-slate-400">
+            Source: <code class="text-emerald-400">reports/UrbanPulse_Daily_Operations_MIS.csv</code>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto border border-slate-800 rounded-xl">
+          <table class="w-full text-left text-xs text-slate-300">
+            <thead class="bg-slate-950 text-slate-400 font-semibold border-b border-slate-800">
+              <tr>
+                <th class="p-3">Report Date</th>
+                <th class="p-3">City</th>
+                <th class="p-3">Requests</th>
+                <th class="p-3">Completed</th>
+                <th class="p-3">Comp %</th>
+                <th class="p-3">Driver Cancel</th>
+                <th class="p-3">Rider Cancel</th>
+                <th class="p-3">Net Revenue (₹)</th>
+                <th class="p-3">Avg Surge</th>
+                <th class="p-3">Wait (min)</th>
+              </tr>
+            </thead>
+            <tbody id="mis-table-body" class="divide-y divide-slate-800/50">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-800 bg-slate-900/60 py-4 px-6 text-center text-xs text-slate-500">
+    UrbanPulse Mobility &bull; Enterprise Fleet Intelligence & Operations Analytics Platform
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

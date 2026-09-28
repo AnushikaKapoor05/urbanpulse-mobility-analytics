@@ -1,0 +1,6 @@
+audit_id,table_name,record_id,column_name,invalid_value,issue_type,severity,recommended_action,action_team
+ERR_0001,trip_fulfillment_logs,FUL_000142,pickup_wait_mins,-5.0,Negative_Temporal_Duration,MEDIUM,Recalculate timestamp difference in ETL,Data Engineering
+ERR_0002,trip_fulfillment_logs,FUL_000993,actual_distance_km,1250.0,GPS_Telematics_Drift_Outlier,HIGH,Recalculate route using Google Maps Matrix API,Telematics / Tech
+ERR_0003,trip_fulfillment_logs,FUL_001499,driver_payout_inr,-150.0,Negative_Financial_Payout,CRITICAL,Freeze negative deduction & audit commission rate,Finance & Payouts
+ERR_0004,trip_fulfillment_logs,FUL_001609,driver_id,EMPTY_OR_NULL,Orphaned_Trip_Record,HIGH,Map trip telemetry to driver GPS logs,Driver Operations Team
+ERR_0005,trip_fulfillment_logs,FUL_001958,trip_duration_mins,0.0,Instantaneous_Trip_Anomaly,MEDIUM,Verify meter start/stop timestamps with socket logs,App Engineering

@@ -1,0 +1,664 @@
+{
+  "city_cat_data": [
+    {
+      "city": "Bengaluru",
+      "vehicle_category": "Auto_Rickshaw",
+      "powertrain": null,
+      "total_requests": 176,
+      "completed": 0,
+      "driver_cancelled": 95,
+      "rider_cancelled": 66,
+      "timeout": 15,
+      "gross_fare": 0,
+      "avg_wait": null,
+      "total_km": 0
+    },
+    {
+      "city": "Bengaluru",
+      "vehicle_category": "Auto_Rickshaw",
+      "powertrain": "CNG",
+      "total_requests": 214,
+      "completed": 214,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 83810.12,
+      "avg_wait": 7.870560747663551,
+      "total_km": 3273.6
+    },
+    {
+      "city": "Bengaluru",
+      "vehicle_category": "Auto_Rickshaw",
+      "powertrain": "Electric",
+      "total_requests": 204,
+      "completed": 204,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 87870.36,
+      "avg_wait": 7.912254901960784,
+      "total_km": 3327.8
+    },
+    {
+      "city": "Bengaluru",
+      "vehicle_category": "Bike_Taxi",
+      "powertrain": null,
+      "total_requests": 118,
+      "completed": 0,
+      "driver_cancelled": 56,
+      "rider_cancelled": 44,
+      "timeout": 18,
+      "gross_fare": 0,
+      "avg_wait": null,
+      "total_km": 0
+    },
+    {
+      "city": "Bengaluru",
+      "vehicle_category": "Bike_Taxi",
+      "powertrain": "Electric",
+      "total_requests": 189,
+      "completed": 189,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 50228.22,
+      "avg_wait": 7.856084656084656,
+      "total_km": 2917.5
+    },
+    {
+      "city": "Bengaluru",
+      "vehicle_category": "Bike_Taxi",
+      "powertrain": "Petrol",
+      "total_requests": 179,
+      "completed": 179,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 47418.42,
+      "avg_wait": 7.850837988826815,
+      "total_km": 2740.5
+    },
+    {
+      "city": "Bengaluru",
+      "vehicle_category": "EV_Sedan",
+      "powertrain": null,
+      "total_requests": 165,
+      "completed": 0,
+      "driver_cancelled": 81,
+      "rider_cancelled": 60,
+      "timeout": 24,
+      "gross_fare": 0,
+      "avg_wait": null,
+      "total_km": 0
+    },
+    {
+      "city": "Bengaluru",
+      "vehicle_category": "EV_Sedan",
+      "powertrain": "Electric",
+      "total_requests": 505,
+      "completed": 505,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 307023.6,
+      "avg_wait": 7.806336633663366,
+      "total_km": 9237.3
+    },
+    {
+      "city": "Bengaluru",
+      "vehicle_category": "Prime_Sedan",
+      "powertrain": null,
+      "total_requests": 146,
+      "completed": 0,
+      "driver_cancelled": 72,
+      "rider_cancelled": 58,
+      "timeout": 16,
+      "gross_fare": 0,
+      "avg_wait": null,
+      "total_km": 0
+    },
+    {
+      "city": "Bengaluru",
+      "vehicle_category": "Prime_Sedan",
+      "powertrain": "CNG",
+      "total_requests": 179,
+      "completed": 179,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 127258.32,
+      "avg_wait": 7.777094972067038,
+      "total_km": 2998.9
+    },
+    {
+      "city": "Bengaluru",
+      "vehicle_category": "Prime_Sedan",
+      "powertrain": "Petrol",
+      "total_requests": 193,
+      "completed": 193,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 126352.8,
+      "avg_wait": 8.221761658031088,
+      "total_km": 3088.8
+    },
+    {
+      "city": "Delhi-NCR",
+      "vehicle_category": "Auto_Rickshaw",
+      "powertrain": null,
+      "total_requests": 193,
+      "completed": 0,
+      "driver_cancelled": 93,
+      "rider_cancelled": 73,
+      "timeout": 27,
+      "gross_fare": 0,
+      "avg_wait": null,
+      "total_km": 0
+    },
+    {
+      "city": "Delhi-NCR",
+      "vehicle_category": "Auto_Rickshaw",
+      "powertrain": "CNG",
+      "total_requests": 266,
+      "completed": 266,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 115194.24,
+      "avg_wait": 8.105263157894736,
+      "total_km": 4333.9
+    },
+    {
+      "city": "Delhi-NCR",
+      "vehicle_category": "Auto_Rickshaw",
+      "powertrain": "Electric",
+      "total_requests": 259,
+      "completed": 259,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 106912.18000000001,
+      "avg_wait": 8.120077220077219,
+      "total_km": 4055.7
+    },
+    {
+      "city": "Delhi-NCR",
+      "vehicle_category": "Bike_Taxi",
+      "powertrain": null,
+      "total_requests": 146,
+      "completed": 0,
+      "driver_cancelled": 69,
+      "rider_cancelled": 69,
+      "timeout": 8,
+      "gross_fare": 0,
+      "avg_wait": null,
+      "total_km": 0
+    },
+    {
+      "city": "Delhi-NCR",
+      "vehicle_category": "Bike_Taxi",
+      "powertrain": "Electric",
+      "total_requests": 189,
+      "completed": 189,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 49778.68,
+      "avg_wait": 8.061375661375662,
+      "total_km": 2993.9
+    },
+    {
+      "city": "Delhi-NCR",
+      "vehicle_category": "Bike_Taxi",
+      "powertrain": "Petrol",
+      "total_requests": 213,
+      "completed": 213,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 59857.54,
+      "avg_wait": 8.303286384976525,
+      "total_km": 3290.1
+    },
+    {
+      "city": "Delhi-NCR",
+      "vehicle_category": "EV_Sedan",
+      "powertrain": null,
+      "total_requests": 202,
+      "completed": 0,
+      "driver_cancelled": 99,
+      "rider_cancelled": 76,
+      "timeout": 27,
+      "gross_fare": 0,
+      "avg_wait": null,
+      "total_km": 0
+    },
+    {
+      "city": "Delhi-NCR",
+      "vehicle_category": "EV_Sedan",
+      "powertrain": "Electric",
+      "total_requests": 522,
+      "completed": 522,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 307754.72,
+      "avg_wait": 8.077586206896552,
+      "total_km": 7871.2
+    },
+    {
+      "city": "Delhi-NCR",
+      "vehicle_category": "Prime_Sedan",
+      "powertrain": null,
+      "total_requests": 174,
+      "completed": 0,
+      "driver_cancelled": 78,
+      "rider_cancelled": 75,
+      "timeout": 21,
+      "gross_fare": 0,
+      "avg_wait": null,
+      "total_km": 0
+    },
+    {
+      "city": "Delhi-NCR",
+      "vehicle_category": "Prime_Sedan",
+      "powertrain": "CNG",
+      "total_requests": 198,
+      "completed": 198,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 122947.44,
+      "avg_wait": 7.9772727272727275,
+      "total_km": 3064.6
+    },
+    {
+      "city": "Delhi-NCR",
+      "vehicle_category": "Prime_Sedan",
+      "powertrain": "Petrol",
+      "total_requests": 225,
+      "completed": 225,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 141498.56,
+      "avg_wait": 7.720444444444444,
+      "total_km": 3569.4
+    },
+    {
+      "city": "Mumbai",
+      "vehicle_category": "Auto_Rickshaw",
+      "powertrain": null,
+      "total_requests": 140,
+      "completed": 0,
+      "driver_cancelled": 66,
+      "rider_cancelled": 59,
+      "timeout": 15,
+      "gross_fare": 0,
+      "avg_wait": null,
+      "total_km": 0
+    },
+    {
+      "city": "Mumbai",
+      "vehicle_category": "Auto_Rickshaw",
+      "powertrain": "CNG",
+      "total_requests": 233,
+      "completed": 233,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 96286.62,
+      "avg_wait": 7.9193133047210305,
+      "total_km": 3669.7
+    },
+    {
+      "city": "Mumbai",
+      "vehicle_category": "Auto_Rickshaw",
+      "powertrain": "Electric",
+      "total_requests": 183,
+      "completed": 183,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 82677.66,
+      "avg_wait": 8.210928961748634,
+      "total_km": 2946.5
+    },
+    {
+      "city": "Mumbai",
+      "vehicle_category": "Bike_Taxi",
+      "powertrain": null,
+      "total_requests": 109,
+      "completed": 0,
+      "driver_cancelled": 63,
+      "rider_cancelled": 34,
+      "timeout": 12,
+      "gross_fare": 0,
+      "avg_wait": null,
+      "total_km": 0
+    },
+    {
+      "city": "Mumbai",
+      "vehicle_category": "Bike_Taxi",
+      "powertrain": "Electric",
+      "total_requests": 142,
+      "completed": 142,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 39342.26,
+      "avg_wait": 8.371126760563381,
+      "total_km": 2289.4
+    },
+    {
+      "city": "Mumbai",
+      "vehicle_category": "Bike_Taxi",
+      "powertrain": "Petrol",
+      "total_requests": 165,
+      "completed": 165,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 46395.26,
+      "avg_wait": 7.851515151515152,
+      "total_km": 2694.8
+    },
+    {
+      "city": "Mumbai",
+      "vehicle_category": "EV_Sedan",
+      "powertrain": null,
+      "total_requests": 154,
+      "completed": 0,
+      "driver_cancelled": 82,
+      "rider_cancelled": 49,
+      "timeout": 23,
+      "gross_fare": 0,
+      "avg_wait": null,
+      "total_km": 0
+    },
+    {
+      "city": "Mumbai",
+      "vehicle_category": "EV_Sedan",
+      "powertrain": "Electric",
+      "total_requests": 406,
+      "completed": 406,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 240320.34,
+      "avg_wait": 7.852463054187192,
+      "total_km": 6349.4
+    },
+    {
+      "city": "Mumbai",
+      "vehicle_category": "Prime_Sedan",
+      "powertrain": null,
+      "total_requests": 117,
+      "completed": 0,
+      "driver_cancelled": 58,
+      "rider_cancelled": 40,
+      "timeout": 19,
+      "gross_fare": 0,
+      "avg_wait": null,
+      "total_km": 0
+    },
+    {
+      "city": "Mumbai",
+      "vehicle_category": "Prime_Sedan",
+      "powertrain": "CNG",
+      "total_requests": 137,
+      "completed": 137,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 92756.72,
+      "avg_wait": 7.632116788321167,
+      "total_km": 2259.5
+    },
+    {
+      "city": "Mumbai",
+      "vehicle_category": "Prime_Sedan",
+      "powertrain": "Petrol",
+      "total_requests": 159,
+      "completed": 159,
+      "driver_cancelled": 0,
+      "rider_cancelled": 0,
+      "timeout": 0,
+      "gross_fare": 104833.68000000001,
+      "avg_wait": 7.845911949685535,
+      "total_km": 2430.6
+    }
+  ],
+  "hourly_data": [
+    {
+      "hour": 0,
+      "requests": 275,
+      "completed": 204
+    },
+    {
+      "hour": 1,
+      "requests": 265,
+      "completed": 201
+    },
+    {
+      "hour": 2,
+      "requests": 282,
+      "completed": 205
+    },
+    {
+      "hour": 3,
+      "requests": 291,
+      "completed": 224
+    },
+    {
+      "hour": 4,
+      "requests": 268,
+      "completed": 208
+    },
+    {
+      "hour": 5,
+      "requests": 295,
+      "completed": 224
+    },
+    {
+      "hour": 6,
+      "requests": 289,
+      "completed": 210
+    },
+    {
+      "hour": 7,
+      "requests": 288,
+      "completed": 215
+    },
+    {
+      "hour": 8,
+      "requests": 299,
+      "completed": 215
+    },
+    {
+      "hour": 9,
+      "requests": 249,
+      "completed": 164
+    },
+    {
+      "hour": 10,
+      "requests": 276,
+      "completed": 194
+    },
+    {
+      "hour": 11,
+      "requests": 293,
+      "completed": 192
+    },
+    {
+      "hour": 12,
+      "requests": 298,
+      "completed": 229
+    },
+    {
+      "hour": 13,
+      "requests": 274,
+      "completed": 209
+    },
+    {
+      "hour": 14,
+      "requests": 259,
+      "completed": 193
+    },
+    {
+      "hour": 15,
+      "requests": 297,
+      "completed": 215
+    },
+    {
+      "hour": 16,
+      "requests": 284,
+      "completed": 220
+    },
+    {
+      "hour": 17,
+      "requests": 275,
+      "completed": 187
+    },
+    {
+      "hour": 18,
+      "requests": 269,
+      "completed": 191
+    },
+    {
+      "hour": 19,
+      "requests": 278,
+      "completed": 205
+    },
+    {
+      "hour": 20,
+      "requests": 292,
+      "completed": 214
+    },
+    {
+      "hour": 21,
+      "requests": 307,
+      "completed": 211
+    },
+    {
+      "hour": 22,
+      "requests": 302,
+      "completed": 221
+    },
+    {
+      "hour": 23,
+      "requests": 295,
+      "completed": 209
+    }
+  ],
+  "cancel_data": [
+    {
+      "cancelled_by": "System",
+      "cancellation_reason": "Driver_Assignment_Timeout_Exceeded",
+      "count": 225,
+      "lost_gbv": 124618.7
+    },
+    {
+      "cancelled_by": "Driver",
+      "cancellation_reason": "Driver_Refused_Drop_Location",
+      "count": 247,
+      "lost_gbv": 123871.1
+    },
+    {
+      "cancelled_by": "Driver",
+      "cancellation_reason": "Driver_Demanded_Cash_Offline",
+      "count": 221,
+      "lost_gbv": 116251.34
+    },
+    {
+      "cancelled_by": "Driver",
+      "cancellation_reason": "Traffic_Gridlock_En_Route",
+      "count": 226,
+      "lost_gbv": 114152.42
+    },
+    {
+      "cancelled_by": "Driver",
+      "cancellation_reason": "Vehicle_Mechanical_Issue",
+      "count": 218,
+      "lost_gbv": 108672.36
+    },
+    {
+      "cancelled_by": "Rider",
+      "cancellation_reason": "High_ETA_Long_Wait_Time",
+      "count": 194,
+      "lost_gbv": 102322.42
+    },
+    {
+      "cancelled_by": "Rider",
+      "cancellation_reason": "Driver_Not_Moving",
+      "count": 169,
+      "lost_gbv": 91437.42
+    },
+    {
+      "cancelled_by": "Rider",
+      "cancellation_reason": "Booked_Alternative_Ride",
+      "count": 168,
+      "lost_gbv": 87675.72
+    },
+    {
+      "cancelled_by": "Rider",
+      "cancellation_reason": "Change_of_Plans",
+      "count": 172,
+      "lost_gbv": 87334.26
+    }
+  ],
+  "surge_data": [
+    {
+      "surge_tier": "Base (1.0x)",
+      "requests": 2558,
+      "completed": 1898,
+      "rider_dropoff": 255,
+      "gross_fare": 725331.2
+    },
+    {
+      "surge_tier": "Extreme (1.8x+)",
+      "requests": 1282,
+      "completed": 837,
+      "rider_dropoff": 185,
+      "gross_fare": 657494.58
+    },
+    {
+      "surge_tier": "High (1.4-1.7x)",
+      "requests": 839,
+      "completed": 631,
+      "rider_dropoff": 75,
+      "gross_fare": 358150.84
+    },
+    {
+      "surge_tier": "Mild (1.1-1.3x)",
+      "requests": 2121,
+      "completed": 1594,
+      "rider_dropoff": 188,
+      "gross_fare": 695541.12
+    }
+  ],
+  "powertrain_data": [
+    {
+      "powertrain": "CNG",
+      "trips": 1227,
+      "km": 19600.2,
+      "fare": 638253.46,
+      "petrol_liters_saved": 0.0
+    },
+    {
+      "powertrain": "Electric",
+      "trips": 2597,
+      "km": 40718.7,
+      "fare": 1270771.3,
+      "petrol_liters_saved": 1916.2
+    },
+    {
+      "powertrain": "Petrol",
+      "trips": 1134,
+      "km": 17814.2,
+      "fare": 526356.26,
+      "petrol_liters_saved": 0.0
+    }
+  ]
+}
