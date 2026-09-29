@@ -13,6 +13,8 @@ Over a 45-day operational window (6,800 bookings, 4,960 completed rides across 3
 * **Cancellation Diagnostics**: Identified that 52% of cancellations were driver-initiated, with "Drop Location Refusal" (avoiding empty return trips) and "Cash Demands" being the leading causes, resulting in ₹9.56 Lakh in lost Gross Booking Value.
 * **Surge Pricing Elasticity**: Discovered that mild-to-moderate surge (1.1x–1.7x) maintained healthy fulfillment (~75%), while extreme surge (1.8x+) caused rider price drop-offs to jump to 14.4% without improving driver availability.
 * **EV Fleet Sustainability & Unit Economics**: Electric vehicles operated at ₹1.20/km vs ₹4.80/km for petrol (a 75% fuel cost reduction), covering 40,718 clean kilometers and saving 5.82 metric tonnes of $\text{CO}_2$ emissions.
+
+
 Live Demo - https://urbanpulse-mobility-analytics.onrender.com/
 ---
 
